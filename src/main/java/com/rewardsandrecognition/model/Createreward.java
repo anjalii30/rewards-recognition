@@ -36,6 +36,29 @@ public class Createreward implements Serializable {
     private String nomination_url;
     @Column(name = "Employee_idname")
     private String employee_idname;
+
+    @Override
+    public String toString() {
+        return "Createreward{" +
+                "id=" + id +
+                ", reward_name='" + reward_name + '\'' +
+                ", reward_scope='" + reward_scope + '\'' +
+                ", frequency='" + frequency + '\'' +
+                ", description='" + description + '\'' +
+                ", objective='" + objective + '\'' +
+                ", starting_date=" + starting_date +
+                ", reward_type='" + reward_type + '\'' +
+                ", nomination_process='" + nomination_process + '\'' +
+                ", nomination_url='" + nomination_url + '\'' +
+                ", employee_idname='" + employee_idname + '\'' +
+                ", project_name='" + project_name + '\'' +
+                ", subject='" + subject + '\'' +
+                ", employee_image=" + employee_image +
+                '}';
+    }
+
+    @Column(name = "Project_name")
+    private String project_name;
     @Column(name = "Subject")
     private String subject;
     @Column(name = "Employee_image")
@@ -148,23 +171,12 @@ public class Createreward implements Serializable {
         this.employee_image = employee_image;
     }
 
-    @Override
-    public String toString() {
-        return "Createreward{" +
-                "id=" + id +
-                ", reward_name='" + reward_name + '\'' +
-                ", reward_scope='" + reward_scope + '\'' +
-                ", frequency='" + frequency + '\'' +
-                ", description='" + description + '\'' +
-                ", objective='" + objective + '\'' +
-                ", starting_date=" + starting_date +
-                ", reward_type='" + reward_type + '\'' +
-                ", nomination_process='" + nomination_process + '\'' +
-                ", nomination_url='" + nomination_url + '\'' +
-                ", employee_idname='" + employee_idname + '\'' +
-                ", subject='" + subject + '\'' +
-                ", employee_image=" + employee_image +
-                '}';
+    public String getProject_name() {
+        return project_name;
+    }
+
+    public void setProject_name(String project_name) {
+        this.project_name = project_name;
     }
 }
 

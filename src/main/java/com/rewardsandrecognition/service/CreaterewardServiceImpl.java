@@ -51,6 +51,7 @@ public class CreaterewardServiceImpl implements CreaterewardService {
         Createaward1.setNomination_process(createreward.getNomination_process());
         Createaward1.setNomination_url(createreward.getNomination_url());
         Createaward1.setEmployee_idname(createreward.getEmployee_idname());
+        Createaward1.setProject_name(createreward.getProject_name());
         Createaward1.setSubject(createreward.getSubject());
         Createaward1.setEmployee_image(createreward.getEmployee_image());
         Createreward update= repository.save(Createaward1);
