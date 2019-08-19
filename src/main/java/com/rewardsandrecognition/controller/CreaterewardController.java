@@ -2,10 +2,8 @@ package com.rewardsandrecognition.controller;
 
 
 import com.rewardsandrecognition.config.JwtTokenUtil;
-import com.rewardsandrecognition.model.Createreward;
-import com.rewardsandrecognition.model.JwtRequest;
-import com.rewardsandrecognition.model.JwtResponse;
-import com.rewardsandrecognition.model.UserDTO;
+import com.rewardsandrecognition.model.*;
+import com.rewardsandrecognition.repository.ReportRepository;
 import com.rewardsandrecognition.service.CreaterewardService;
 import com.rewardsandrecognition.service.JwtUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +26,17 @@ public class CreaterewardController {
 
     @Autowired
     CreaterewardService service;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
+    @Autowired
+    private JwtUserDetailsService userDetailsService;
+
+    @Autowired
+    ReportRepository reportRepository;
+
 
 
     @PostMapping("/save")
@@ -69,17 +78,10 @@ public class CreaterewardController {
         return "Deleted Succcessfully id="+id;
     }
 
+    /*------- Login Controller here onwards----*/
 
 
 
-
-
-    @Autowired
-    private AuthenticationManager authenticationManager;
-    @Autowired
-    private JwtTokenUtil jwtTokenUtil;
-    @Autowired
-    private JwtUserDetailsService userDetailsService;
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
@@ -103,6 +105,35 @@ public class CreaterewardController {
     public ResponseEntity<?> saveUser(@RequestBody UserDTO user) throws Exception {
         return ResponseEntity.ok(userDetailsService.save(user));
     }
+
+
+
+
+
+    /*------Report Controller here onwards---- */
+
+
+    @GetMapping("/reports")
+    public List<Report> getAllReports() {
+        return reportRepository.findAll();
+    }
+
+    @GetMapping("/reports/{frequency}")
+    public long findByFrequency(@PathVariable String frequency){
+        return reportRepository.findByFrequency(frequency);
+    }
+
+    @GetMapping("/reports/people")
+    public long findByPeople(){
+        return reportRepository.findByPeople();
+    }
+
+    @GetMapping("/reports/rewards")
+    public long findByRewards(){
+        return reportRepository.findByRewards();
+    }
+
+
 
 
 }
