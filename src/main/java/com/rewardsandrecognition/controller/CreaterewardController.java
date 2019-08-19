@@ -118,21 +118,29 @@ public class CreaterewardController {
         return reportRepository.findAll();
     }
 
-    @GetMapping("/reports/{frequency}")
-    public long findByFrequency(@PathVariable String frequency){
-        return reportRepository.findByFrequency(frequency);
+    @GetMapping("/reports/{year}")
+    public List<Report> getAllReports(@PathVariable Long year){
+        return reportRepository.findAllByYear(year);
     }
 
-    @GetMapping("/reports/people")
-    public long findByPeople(){
-        return reportRepository.findByPeople();
+    @GetMapping("/reports/{frequency}/{year}")
+    public long findByFrequency(@PathVariable String frequency, @PathVariable Long year){
+        return reportRepository.findByFrequency(frequency, year);
     }
 
-    @GetMapping("/reports/rewards")
-    public long findByRewards(){
-        return reportRepository.findByRewards();
+
+
+    @GetMapping("/reports/people/{year}")
+    public long findByPeople(@PathVariable Long year){
+        return reportRepository.findByPeople(year);
     }
 
+
+    @GetMapping("/reports/rewards/{year}")
+    public long findByRewards(@PathVariable Long year){
+
+        return reportRepository.findByRewards(year);
+    }
 
 
 

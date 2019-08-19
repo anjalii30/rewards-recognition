@@ -27,7 +27,7 @@ public class Createreward implements Serializable {
     @Column(name = "Objective")
     private String objective;
     @Column(name = "Starting_Date")
-    private Date starting_date;
+    private Date starting_date; /* year-month-date*/
     @Column(name = "Reward_Type")
     private String reward_type;
     @Column(name = "Nomination_Process")

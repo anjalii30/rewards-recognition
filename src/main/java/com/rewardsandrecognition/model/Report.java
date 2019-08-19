@@ -24,14 +24,19 @@ public class Report {
     @NotBlank
     private String empId;
 
+    @Column(name="year")
+    @NotBlank
+    private Long year;
+
     public Report() {
     }
 
-    public Report(Long id, @NotBlank String rewardName, @NotBlank String frequency, @NotBlank String empId) {
+    public Report(Long id, @NotBlank String rewardName, @NotBlank String frequency, @NotBlank String empId, @NotBlank Long year) {
         this.id = id;
         this.rewardName = rewardName;
         this.frequency = frequency;
         this.empId = empId;
+        this.year=year;
     }
 
     public Long getId() {
@@ -64,5 +69,13 @@ public class Report {
 
     public void setEmpId(String empId) {
         this.empId = empId;
+    }
+
+    public Long getYear() {
+        return year;
+    }
+
+    public void setYear(Long year) {
+        this.year = year;
     }
 }
