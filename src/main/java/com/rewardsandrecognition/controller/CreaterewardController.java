@@ -113,12 +113,12 @@ public class CreaterewardController {
     /*------Report Controller here onwards---- */
 
 
-    @GetMapping("/reports")
+     @GetMapping("/reports")
     public List<Report> getAllReports() {
         return reportRepository.findAll();
     }
 
-    @GetMapping("/reports/{year}")
+  /*  @GetMapping("/reports/{year}")
     public List<Report> getAllReports(@PathVariable Long year){
         return reportRepository.findAllByYear(year);
     }
@@ -127,21 +127,63 @@ public class CreaterewardController {
     public long findByFrequency(@PathVariable String frequency, @PathVariable Long year){
         return reportRepository.findByFrequency(frequency, year);
     }
+*/
 
 
+    @GetMapping("/reports/years")
+   public List getAllYears(){
+       List years= reportRepository.getAllYears();
+       return years;
+   }
 
-    @GetMapping("/reports/people/{year}")
+
+   @GetMapping("/reports/people/{year}")
     public long findByPeople(@PathVariable Long year){
-        return reportRepository.findByPeople(year);
-    }
+        long people= reportRepository.findByPeople(year);
+        return people;
+   }
 
 
-    @GetMapping("/reports/rewards/{year}")
+   @GetMapping("/reports/rewards/{year}")
     public long findByRewards(@PathVariable Long year){
+       long rewards =  reportRepository.findByRewards(year);
+       return rewards;
+       // return reportRepository.findByRewards(year);
+   }
 
-        return reportRepository.findByRewards(year);
+
+   @GetMapping("/reports/weekly/{year}")
+    public long weeklyFrequency(@PathVariable Long year){
+
+       long week= reportRepository.weeklyFrequency(year);
+       return week;
+
+   }
+
+    @GetMapping("/reports/monthly/{year}")
+    public long monthlyFrequency(@PathVariable Long year)
+    {
+        long month= reportRepository.monthlyFrequency(year);
+        return month;
     }
 
 
+    @GetMapping("/reports/quarterly/{year}")
+    public long quarterlyFrequency(@PathVariable Long year){
 
+       long quarter= reportRepository.quarterlyFrequency(year);
+       return quarter;
+    }
+
+    @GetMapping("/reports/annually/{year}")
+    public long annuallyFrequency(@PathVariable Long year){
+        long annual= reportRepository.annuallyFrequency(year);
+        return annual;
+    }
+
+    @GetMapping("/reports/spot/{year}")
+    public long spotFrequency(@PathVariable Long year){
+        long spot= reportRepository.spotFrequency(year);
+        return spot;
+    }
 }
