@@ -6,6 +6,8 @@ import com.rewardsandrecognition.model.*;
 import com.rewardsandrecognition.repository.ReportRepository;
 import com.rewardsandrecognition.service.CreaterewardService;
 import com.rewardsandrecognition.service.JwtUserDetailsService;
+import com.rewardsandrecognition.service.SampleNominateService;
+import com.rewardsandrecognition.service.Services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +37,15 @@ public class CreaterewardController {
     private JwtUserDetailsService userDetailsService;
 
     @Autowired
+    private
     ReportRepository reportRepository;
+
+    @Autowired
+    private
+    SampleNominateService nominateService;
+
+    @Autowired
+    private Services services;
 
 
 
@@ -131,10 +141,10 @@ public class CreaterewardController {
 
 
     @GetMapping("/reports/years")
-   public List getAllYears(){
-       List years= reportRepository.getAllYears();
-       return years;
-   }
+    public List getAllYears(){
+        List years= reportRepository.getAllYears();
+        return years;
+    }
 
 
    @GetMapping("/reports/people/{year}")
@@ -185,5 +195,37 @@ public class CreaterewardController {
     public long spotFrequency(@PathVariable Long year){
         long spot= reportRepository.spotFrequency(year);
         return spot;
+    }
+
+    /*------ nominate controleer here onwards------*/
+    @PostMapping("/practice/save")
+    public Samplenominate Save(@RequestBody Samplenominate samplenominate) {
+        nominateService.save(samplenominate);
+        return samplenominate;
+    }
+
+    @GetMapping("/practice/nominatelist")
+    public List<Samplenominate> samplenominateListlist() {
+        return nominateService.getALLSamplenominate();
+    }
+
+    @GetMapping("/practice/list/{rewardID}")
+    public Samplenominate getById(@PathVariable String rewardID) {
+        return nominateService.getById(rewardID);
+    }
+
+
+
+    /*--------dropdown---*/
+    @RequestMapping(value = "/load/{projectname}", method = RequestMethod.GET)
+    public @ResponseBody List<EmployeeModel> load(@PathVariable String projectname) {
+        List<EmployeeModel> employees = services.getEmployeeByProject(projectname);
+
+        return employees;
+    }
+
+    @GetMapping("/dlist")
+    public List<ProjectModel> ddlist() {
+        return services.getProjectsList();
     }
 }

@@ -21,6 +21,7 @@ public interface ReportRepository extends JpaRepository<Report,Long> {
     @Query(value = "SELECT  DISTINCT year from report ", nativeQuery = true)
     public List getAllYears();
 
+
     @Query(value= "SELECT  count(DISTINCT emp_id) from report where year = ?1  ", nativeQuery = true)
     public long findByPeople(Long year);
 
