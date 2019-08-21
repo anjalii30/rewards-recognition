@@ -17,5 +17,5 @@ public interface CreaterewardService {
 
     public Createreward Update(Long id, Createreward createreward);
 
-    public Createreward findByRolled();
+    public List<Createreward> findByRolled();
 }

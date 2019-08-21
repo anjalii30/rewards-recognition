@@ -63,20 +63,9 @@ public class CreaterewardController {
     }
 
     @GetMapping("/Rolled_list")
-    public Createreward findByRolled(){
+    public List<Createreward> findByRolled(){
         return service.findByRolled();
     }
-
-
-
-   /* @PutMapping("/process")
-    public void process(@RequestBody Createreward[] payload)
-            throws Exception {
-
-       return service.payload;
-
-    }*/
-
 
     @GetMapping("/list")
     public List<Createreward> list(){

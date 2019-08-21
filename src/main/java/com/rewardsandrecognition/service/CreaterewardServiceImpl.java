@@ -38,7 +38,7 @@ public class CreaterewardServiceImpl implements CreaterewardService {
     }
 
     @Override
-    public Createreward findByRolled(){
+    public List<Createreward> findByRolled(){
         return repository.findByRolled();
     }
 
