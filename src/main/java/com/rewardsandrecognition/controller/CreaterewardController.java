@@ -62,6 +62,12 @@ public class CreaterewardController {
 
     }
 
+    @GetMapping("/Rolled_list")
+    public Createreward findByRolled(){
+        return service.findByRolled();
+    }
+
+
 
    /* @PutMapping("/process")
     public void process(@RequestBody Createreward[] payload)

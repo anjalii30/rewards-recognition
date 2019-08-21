@@ -16,4 +16,6 @@ public interface CreaterewardService {
     public void deleteCreatereward(Long id);
 
     public Createreward Update(Long id, Createreward createreward);
+
+    public Createreward findByRolled();
 }
