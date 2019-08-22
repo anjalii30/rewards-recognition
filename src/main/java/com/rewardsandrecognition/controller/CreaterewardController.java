@@ -4,10 +4,7 @@ package com.rewardsandrecognition.controller;
 import com.rewardsandrecognition.config.JwtTokenUtil;
 import com.rewardsandrecognition.model.*;
 import com.rewardsandrecognition.repository.ReportRepository;
-import com.rewardsandrecognition.service.CreaterewardService;
-import com.rewardsandrecognition.service.JwtUserDetailsService;
-import com.rewardsandrecognition.service.SampleNominateService;
-import com.rewardsandrecognition.service.Services;
+import com.rewardsandrecognition.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.ResponseEntity;
@@ -39,11 +36,13 @@ public class CreaterewardController {
     @Autowired
     private
     ReportRepository reportRepository;
+    @Autowired
+    ReportService reportService;
+
 
     @Autowired
     private
     SampleNominateService nominateService;
-
     @Autowired
     private Services services;
 
@@ -123,23 +122,6 @@ public class CreaterewardController {
     /*------Report Controller here onwards---- */
 
 
-     @GetMapping("/reports")
-    public List<Report> getAllReports() {
-        return reportRepository.findAll();
-    }
-
-  /*  @GetMapping("/reports/{year}")
-    public List<Report> getAllReports(@PathVariable Long year){
-        return reportRepository.findAllByYear(year);
-    }
-
-    @GetMapping("/reports/{frequency}/{year}")
-    public long findByFrequency(@PathVariable String frequency, @PathVariable Long year){
-        return reportRepository.findByFrequency(frequency, year);
-    }
-*/
-
-
     @GetMapping("/reports/years")
     public List getAllYears(){
         List years= reportRepository.getAllYears();
@@ -147,57 +129,13 @@ public class CreaterewardController {
     }
 
 
-   @GetMapping("/reports/people/{year}")
-    public long findByPeople(@PathVariable Long year){
-        long people= reportRepository.findByPeople(year);
-        return people;
-   }
-
-
-   @GetMapping("/reports/rewards/{year}")
-    public long findByRewards(@PathVariable Long year){
-       long rewards =  reportRepository.findByRewards(year);
-       return rewards;
-       // return reportRepository.findByRewards(year);
-   }
-
-
-   @GetMapping("/reports/weekly/{year}")
-    public long weeklyFrequency(@PathVariable Long year){
-
-       long week= reportRepository.weeklyFrequency(year);
-       return week;
-
-   }
-
-    @GetMapping("/reports/monthly/{year}")
-    public long monthlyFrequency(@PathVariable Long year)
-    {
-        long month= reportRepository.monthlyFrequency(year);
-        return month;
+    @GetMapping("/reports/{year}")
+    public Object getReport(@PathVariable Long year){
+        Object report = reportService.getReport(year);
+        return report;
     }
 
-
-    @GetMapping("/reports/quarterly/{year}")
-    public long quarterlyFrequency(@PathVariable Long year){
-
-       long quarter= reportRepository.quarterlyFrequency(year);
-       return quarter;
-    }
-
-    @GetMapping("/reports/annually/{year}")
-    public long annuallyFrequency(@PathVariable Long year){
-        long annual= reportRepository.annuallyFrequency(year);
-        return annual;
-    }
-
-    @GetMapping("/reports/spot/{year}")
-    public long spotFrequency(@PathVariable Long year){
-        long spot= reportRepository.spotFrequency(year);
-        return spot;
-    }
-
-    /*------ nominate controleer here onwards------*/
+    /*------ nominate controller here onwards------*/
     @PostMapping("/practice/save")
     public Samplenominate Save(@RequestBody Samplenominate samplenominate) {
         nominateService.save(samplenominate);
@@ -216,7 +154,9 @@ public class CreaterewardController {
 
 
 
-    /*--------dropdown---*/
+    /*--------dropdown controller here onwards---*/
+
+
     @RequestMapping(value = "/load/{projectname}", method = RequestMethod.GET)
     public @ResponseBody List<EmployeeModel> load(@PathVariable String projectname) {
         List<EmployeeModel> employees = services.getEmployeeByProject(projectname);
