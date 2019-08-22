@@ -18,4 +18,9 @@ public interface CreaterewardService {
     public Createreward Update(Long id, Createreward createreward);
 
     public List<Createreward> findByRolled();
+
+    public List<Createreward> findByNominationClosed();
+
+    public List<Createreward> findByDiscontinued();
+
 }

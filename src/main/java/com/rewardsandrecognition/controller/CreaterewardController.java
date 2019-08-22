@@ -67,6 +67,16 @@ public class CreaterewardController {
         return service.findByRolled();
     }
 
+    @GetMapping("/Nomination_Closed")
+    public List<Createreward> findByNominationClosed(){
+        return service.findByNominationClosed();
+    }
+
+    @GetMapping("/Discontinued")
+    public List<Createreward> findByDiscontinued(){
+        return service.findByDiscontinued();
+    }
+
     @GetMapping("/list")
     public List<Createreward> list(){
         return service.getALLCreatereward();

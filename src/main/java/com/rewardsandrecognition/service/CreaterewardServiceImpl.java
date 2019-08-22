@@ -43,6 +43,16 @@ public class CreaterewardServiceImpl implements CreaterewardService {
     }
 
     @Override
+    public List<Createreward> findByNominationClosed(){
+        return repository.findByNominationClosed();
+    }
+
+    @Override
+    public List<Createreward> findByDiscontinued(){
+        return repository.findByDiscontinued();
+    }
+
+    @Override
     public Createreward Update(Long id, Createreward createreward)
     {
         Createreward Createaward1=repository.findById(id).get();
@@ -56,7 +66,7 @@ public class CreaterewardServiceImpl implements CreaterewardService {
         Createaward1.setNomination_process(createreward.getNomination_process());
         Createaward1.setNomination_url(createreward.getNomination_url());
         Createaward1.setEmployee_idname(createreward.getEmployee_idname());
-        Createaward1.setRolled_out(createreward.getRolled_out());
+        Createaward1.setAward_status(createreward.getAward_status());
         Createaward1.setProject_name(createreward.getProject_name());
         Createaward1.setSubject(createreward.getSubject());
         Createaward1.setEmployee_image(createreward.getEmployee_image());

@@ -36,16 +36,8 @@ public class Createreward implements Serializable {
     private String nomination_url;
     @Column(name = "Employee_idname")
     private String employee_idname;
-    @Column(name = "Rolled_Out")
-    private Boolean rolled_out;
-
-    public Boolean getRolled_out() {
-        return rolled_out;
-    }
-
-    public void setRolled_out(Boolean rolled_out) {
-        this.rolled_out = rolled_out;
-    }
+    @Column(name = "Award_Status")
+    private int award_status=0;
 
     @Override
     public String toString() {
@@ -61,11 +53,19 @@ public class Createreward implements Serializable {
                 ", nomination_process='" + nomination_process + '\'' +
                 ", nomination_url='" + nomination_url + '\'' +
                 ", employee_idname='" + employee_idname + '\'' +
-                ", rolled_out=" + rolled_out +
+                ", award_status=" + award_status +
                 ", project_name='" + project_name + '\'' +
                 ", subject='" + subject + '\'' +
                 ", employee_image=" + employee_image +
                 '}';
+    }
+
+    public int getAward_status() {
+        return award_status;
+    }
+
+    public void setAward_status(int award_status) {
+        this.award_status = award_status;
     }
 
     @Column(name = "Project_name")
