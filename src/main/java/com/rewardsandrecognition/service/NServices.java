@@ -1,13 +1,12 @@
 package com.rewardsandrecognition.service;
 
-//import com.example.dropdown.Model.EmployeeModel;
-//import com.example.dropdown.Model.ProjectModel;
+
 import com.rewardsandrecognition.model.EmployeeModel;
 import com.rewardsandrecognition.model.ProjectModel;
 
 import java.util.List;
 
-public interface Services {
+public interface NServices {
 
     public List<ProjectModel> getProjectsList();
 
