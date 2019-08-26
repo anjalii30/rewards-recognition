@@ -1,6 +1,5 @@
 package com.rewardsandrecognition.repository;
 
-//import com.example.dropdown.Model.ProjectModel;
 import com.rewardsandrecognition.model.ProjectModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;

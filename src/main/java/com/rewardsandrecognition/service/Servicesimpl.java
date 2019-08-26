@@ -1,11 +1,6 @@
 package com.rewardsandrecognition.service;
 
-/*
-import com.example.dropdown.Model.EmployeeModel;
-import com.example.dropdown.Model.ProjectModel;
-import com.example.dropdown.Repository.EmployeeRepository;
-import com.example.dropdown.Repository.ProjectRepository;
-*/
+
 import com.rewardsandrecognition.model.EmployeeModel;
 import com.rewardsandrecognition.model.ProjectModel;
 import com.rewardsandrecognition.repository.EmployeeRepository;
@@ -16,9 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+
+
 @Service
 @Transactional
-public class Servicesimpl implements Services {
+public class Servicesimpl implements NServices {
 
     @Autowired
     EmployeeRepository employeeRepository;

@@ -40,11 +40,15 @@ public class CreaterewardController {
     ReportService reportService;
 
 
+
+
     @Autowired
-    private
-    SampleNominateService nominateService;
+    private NServices nServices;
+
     @Autowired
-    private Services services;
+    SampleNominateService snservice;
+
+
 
 
 
@@ -140,37 +144,24 @@ public class CreaterewardController {
         return report;
     }
 
-    /*------ nominate controller here onwards------*/
-    @PostMapping("/practice/save")
-    public Samplenominate Save(@RequestBody Samplenominate samplenominate) {
-        nominateService.save(samplenominate);
-        return samplenominate;
-    }
+    /*------ nominate and drop down  controller here onwards------*/
 
-    @GetMapping("/practice/nominatelist")
-    public List<Samplenominate> samplenominateListlist() {
-        return nominateService.getALLSamplenominate();
-    }
-
-    @GetMapping("/practice/list/{rewardID}")
-    public Samplenominate getById(@PathVariable String rewardID) {
-        return nominateService.getById(rewardID);
-    }
-
-
-
-    /*--------dropdown controller here onwards---*/
-
-
-    @RequestMapping(value = "/load/{projectname}", method = RequestMethod.GET)
+    @RequestMapping(value = "/trail/load/{projectname}", method = RequestMethod.GET)
     public @ResponseBody List<EmployeeModel> load(@PathVariable String projectname) {
-        List<EmployeeModel> employees = services.getEmployeeByProject(projectname);
+        List<EmployeeModel> employees = nServices.getEmployeeByProject(projectname);
 
         return employees;
     }
 
-    @GetMapping("/dlist")
-    public List<ProjectModel> ddlist() {
-        return services.getProjectsList();
+    @GetMapping("/trail/list")
+    public List<ProjectModel> nlist() {
+        return nServices.getProjectsList();
     }
+
+    @PostMapping("/trail/save")
+    public Samplenominate Save(@RequestBody Samplenominate samplenominate) {
+        snservice.save(samplenominate);
+        return samplenominate;
+    }
+
 }
