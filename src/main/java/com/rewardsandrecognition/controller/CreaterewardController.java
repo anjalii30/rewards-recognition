@@ -61,12 +61,12 @@ public class CreaterewardController {
 
     }
 
-    @GetMapping("/Rolled_list")
+    @GetMapping("/Rolledlist")
     public List<Createreward> findByRolled(){
         return service.findByRolled();
     }
 
-    @GetMapping("/Nomination_Closed")
+    @GetMapping("/NominationClosed")
     public List<Createreward> findByNominationClosed(){
         return service.findByNominationClosed();
     }

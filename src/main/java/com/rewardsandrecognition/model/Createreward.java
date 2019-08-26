@@ -1,12 +1,13 @@
 package com.rewardsandrecognition.model;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Blob;
 import java.util.Date;
-
+@CrossOrigin
 @Entity
 @Table(name = "createreward")
 @EntityListeners(AuditingEntityListener.class)
