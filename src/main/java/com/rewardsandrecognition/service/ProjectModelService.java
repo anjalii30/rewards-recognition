@@ -1,14 +1,15 @@
 package com.rewardsandrecognition.service;
 
-
-import com.rewardsandrecognition.model.DAOUser;
 import com.rewardsandrecognition.model.ProjectModel;
+import com.rewardsandrecognition.model.Samplenominate;
 
 import java.util.List;
 
-public interface NServices {
+public interface ProjectModelService {
+
+    public void getProjects(ProjectModel projectModel);
 
     public List<ProjectModel> getProjectsList();
 
-    public List <String> getEmployeeByProject(String projectname);
-}
+
+    }

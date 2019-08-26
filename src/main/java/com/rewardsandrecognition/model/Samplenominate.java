@@ -12,7 +12,7 @@ public class Samplenominate implements Serializable {
     private Long Sno;
     @Column(name = "projectname",updatable = false,nullable = false)
     private String projectname;
-    @Column(name = "Employeename")
+    @Column(name = "employeename")
     private String Employeename;
     @Column(name = "Description")
     private String Description;

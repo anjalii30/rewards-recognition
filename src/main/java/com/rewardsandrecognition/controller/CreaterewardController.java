@@ -49,6 +49,8 @@ public class CreaterewardController {
     SampleNominateService snservice;
 
 
+    @Autowired
+    ProjectModelService projectModelService;
 
 
 
@@ -146,11 +148,11 @@ public class CreaterewardController {
 
     /*------ nominate and drop down  controller here onwards------*/
 
-    @RequestMapping(value = "/trail/load/{projectname}", method = RequestMethod.GET)
-    public @ResponseBody List<EmployeeModel> load(@PathVariable String projectname) {
-        List<EmployeeModel> employees = nServices.getEmployeeByProject(projectname);
-
-        return employees;
+    @GetMapping(value = "/trail/load/{projectname}")
+    public List<String> load(@PathVariable String projectname) {
+        System.out.println(projectname);
+        List<String> users = nServices.getEmployeeByProject(projectname);
+        return users;
     }
 
     @GetMapping("/trail/list")
@@ -159,9 +161,18 @@ public class CreaterewardController {
     }
 
     @PostMapping("/trail/save")
-    public Samplenominate Save(@RequestBody Samplenominate samplenominate) {
+    public Samplenominate save(@RequestBody Samplenominate samplenominate) {
         snservice.save(samplenominate);
         return samplenominate;
+    }
+
+    @PostMapping("/projects")
+    public ProjectModel getProjects(@RequestBody ProjectModel projectModel){
+      //  String username=projectModelService.tokendecoder(token);
+        System.out.println(projectModel);
+        projectModelService.getProjects(projectModel);
+        return projectModel;
+
     }
 
 }
