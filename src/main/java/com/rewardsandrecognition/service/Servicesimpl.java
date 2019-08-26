@@ -1,9 +1,7 @@
 package com.rewardsandrecognition.service;
 
-
-import com.rewardsandrecognition.model.EmployeeModel;
 import com.rewardsandrecognition.model.ProjectModel;
-import com.rewardsandrecognition.repository.EmployeeRepository;
+import com.rewardsandrecognition.repository.DAOUserRepository;
 import com.rewardsandrecognition.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,17 +16,27 @@ import java.util.List;
 public class Servicesimpl implements NServices {
 
     @Autowired
-    EmployeeRepository employeeRepository;
+    DAOUserRepository daoUserRepository;
     @Autowired
     ProjectRepository projectRepository;
 
+
     @Override
-    public List<ProjectModel> getProjectsList() {
-        return (List<ProjectModel>)projectRepository.getProjectsList();
+    public List getProjectsList()
+    {
+        return (List)projectRepository.getProjectsList();
     }
 
     @Override
-    public List<EmployeeModel> getEmployeeByProject(String employeeid) {
-        return (List<EmployeeModel>)employeeRepository.getEmployeeByProject(employeeid);
+    public List<String> getEmployeeByProject(String projectname) {
+        System.out.println(projectname);
+        return (List<String>)daoUserRepository.getEmployeeByProject(projectname);
+    }
+
+    @Override
+    public void getProjects(ProjectModel projectModel) {
+
+        projectRepository.save(projectModel);
+
     }
 }

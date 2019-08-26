@@ -1,41 +1,22 @@
 package com.rewardsandrecognition.repository;
 
 import com.rewardsandrecognition.model.ProjectModel;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 
 @Transactional
 @Repository
-public class ProjectRepository {
+public interface ProjectRepository extends JpaRepository<ProjectModel, Integer> {
 
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
 
-    public List<ProjectModel> getProjectsList() {
-        String sql = "select * from projects";
 
-        RowMapper<ProjectModel> rowMapper = new ProjectModelRowMapper();
-        List<ProjectModel> list = jdbcTemplate.query(sql, rowMapper);
+ @Query(value="select distinct projectname from projects",nativeQuery = true)
+ public List getProjectsList();
 
-        return list;
-    }
 
-    class ProjectModelRowMapper implements RowMapper<ProjectModel> {
-
-        @Override
-        public ProjectModel mapRow(ResultSet rs, int rowNum) throws SQLException {
-            ProjectModel project = new ProjectModel();
-            project.setProjectid(rs.getInt("projectid"));
-            project.setProjectname(rs.getString("projectname"));
-            return project;
-        }
-    }
 }

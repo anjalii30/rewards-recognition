@@ -49,9 +49,6 @@ public class CreaterewardController {
     SampleNominateService snservice;
 
 
-
-
-
     @PostMapping("/save")
     public Createreward save(@RequestBody Createreward createreward){
         service.saveOrUpdate(createreward);
@@ -64,15 +61,6 @@ public class CreaterewardController {
         return service.Update(id, createreward);
 
     }
-
-
-   /* @PutMapping("/process")
-    public void process(@RequestBody Createreward[] payload)
-            throws Exception {
-
-       return service.payload;
-
-    }*/
 
 
     @GetMapping("/list")
@@ -101,7 +89,11 @@ public class CreaterewardController {
         final UserDetails userDetails = userDetailsService
                 .loadUserByUsername(authenticationRequest.getUsername());
         final String token = jwtTokenUtil.generateToken(userDetails);
-        return ResponseEntity.ok(new JwtResponse(token));
+       // String s[]=new String[2];
+        //s[0]=token;
+       // s[1] = DAOUserRepository.findRole((String) userDetails.get("username"))
+      return ResponseEntity.ok(new JwtResponse(token) );
+     //   return new ResponseEntity<>(s, HttpStatus.Ok);
     }
     private void authenticate(String username, String password) throws Exception {
         try {
@@ -141,22 +133,31 @@ public class CreaterewardController {
 
     /*------ nominate and drop down  controller here onwards------*/
 
-    @RequestMapping(value = "/trail/load/{projectname}", method = RequestMethod.GET)
-    public @ResponseBody List<EmployeeModel> load(@PathVariable String projectname) {
-        List<EmployeeModel> employees = nServices.getEmployeeByProject(projectname);
-
-        return employees;
+    @GetMapping(value = "/trail/load/{projectname}")
+    public List<String> load(@PathVariable String projectname) {
+        System.out.println(projectname);
+        List<String> users = nServices.getEmployeeByProject(projectname);
+        return users;
     }
 
-    @GetMapping("/trail/list")
-    public List<ProjectModel> nlist() {
-        return nServices.getProjectsList();
+    @GetMapping("/trail/projectlist")
+    public List getProjectsList() {
+        return (List) nServices.getProjectsList();
     }
 
     @PostMapping("/trail/save")
-    public Samplenominate Save(@RequestBody Samplenominate samplenominate) {
+    public Samplenominate save(@RequestBody Samplenominate samplenominate) {
         snservice.save(samplenominate);
         return samplenominate;
+    }
+
+    @PostMapping("/projects")
+    public ProjectModel getProjects(@RequestBody ProjectModel projectModel){
+      //  String username=projectModelService.tokendecoder(token);
+        System.out.println(projectModel);
+        nServices.getProjects(projectModel);
+        return projectModel;
+
     }
 
 }
