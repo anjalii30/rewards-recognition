@@ -27,6 +27,9 @@ public class CreaterewardController {
     CreaterewardService service;
 
     @Autowired
+    AwardedService awardedService;
+
+    @Autowired
     private AuthenticationManager authenticationManager;
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
@@ -83,7 +86,7 @@ public class CreaterewardController {
     }
 
     @GetMapping("/list")
-    public List<Createreward> list(){
+    public List<Createreward> getALLCreatereward(){
         return service.getALLCreatereward();
     }
 
@@ -173,6 +176,37 @@ public class CreaterewardController {
         projectModelService.getProjects(projectModel);
         return projectModel;
 
+    }
+
+    /*-------AWARDED--------*/
+
+    @PostMapping("/awardedSave")
+    public Awarded save(@RequestBody Awarded awarded){
+        awardedService.save(awarded);
+        return awarded;
+    }
+
+
+    @PutMapping("/awardedUpdate/{id}")
+    public Awarded Update(@PathVariable Long id,@RequestBody Awarded awarded){
+        return awardedService.Update(id, awarded);
+
+    }
+
+    @GetMapping("/awardedList")
+    public List<Awarded> awardedList(){
+        return awardedService.getALLAwarded();
+    }
+
+    @GetMapping("/awardedList/{id}")
+    public Awarded getByAwardedId(@PathVariable Long id){
+        return awardedService.getByAwardedId(id);
+    }
+
+    @DeleteMapping("/awardedDelete/{id}")
+    public String  deleteAwarded(@PathVariable Long id){
+        awardedService.deleteAwarded(id);
+        return "Deleted Successfully id="+id;
     }
 
 }

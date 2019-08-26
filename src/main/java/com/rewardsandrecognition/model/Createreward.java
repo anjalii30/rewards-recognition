@@ -35,10 +35,8 @@ public class Createreward implements Serializable {
     private String nomination_process;
     @Column(name = "Nomination_Url")
     private String nomination_url;
-    @Column(name = "Employee_idname")
-    private String employee_idname;
-    @Column(name = "Award_Status")
-    private int award_status=0;
+    @Column(name = "Ending_Date")
+    private Date ending_date;
 
     @Override
     public String toString() {
@@ -53,13 +51,21 @@ public class Createreward implements Serializable {
                 ", reward_type='" + reward_type + '\'' +
                 ", nomination_process='" + nomination_process + '\'' +
                 ", nomination_url='" + nomination_url + '\'' +
-                ", employee_idname='" + employee_idname + '\'' +
+                ", ending_date=" + ending_date +
                 ", award_status=" + award_status +
-                ", project_name='" + project_name + '\'' +
-                ", subject='" + subject + '\'' +
-                ", employee_image=" + employee_image +
                 '}';
     }
+
+    public Date getEnding_date() {
+        return ending_date;
+    }
+
+    public void setEnding_date(Date ending_date) {
+        this.ending_date = ending_date;
+    }
+
+    @Column(name = "Award_Status")
+    private int award_status=0;
 
     public int getAward_status() {
         return award_status;
@@ -69,12 +75,6 @@ public class Createreward implements Serializable {
         this.award_status = award_status;
     }
 
-    @Column(name = "Project_name")
-    private String project_name;
-    @Column(name = "Subject")
-    private String subject;
-    @Column(name = "Employee_image")
-    private Blob employee_image;
 
     public Createreward() {
     }
@@ -159,36 +159,4 @@ public class Createreward implements Serializable {
         this.nomination_url = nomination_url;
     }
 
-    public String getEmployee_idname() {
-        return employee_idname;
-    }
-
-    public void setEmployee_idname(String employee_idname) {
-        this.employee_idname = employee_idname;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
-
-    public Blob getEmployee_image() {
-        return employee_image;
-    }
-
-    public void setEmployee_image(Blob employee_image) {
-        this.employee_image = employee_image;
-    }
-
-    public String getProject_name() {
-        return project_name;
-    }
-
-    public void setProject_name(String project_name) {
-        this.project_name = project_name;
-    }
 }
-

@@ -18,7 +18,7 @@ public class CreaterewardServiceImpl implements CreaterewardService {
 
     @Override
     public List<Createreward> getALLCreatereward(){
-        return (List<Createreward>)repository.findAll();
+        return repository.getALLCreatereward();
     }
 
     @Override
@@ -65,11 +65,9 @@ public class CreaterewardServiceImpl implements CreaterewardService {
         Createaward1.setReward_type(createreward.getReward_type());
         Createaward1.setNomination_process(createreward.getNomination_process());
         Createaward1.setNomination_url(createreward.getNomination_url());
-        Createaward1.setEmployee_idname(createreward.getEmployee_idname());
+        Createaward1.setEnding_date(createreward.getEnding_date());
         Createaward1.setAward_status(createreward.getAward_status());
-        Createaward1.setProject_name(createreward.getProject_name());
-        Createaward1.setSubject(createreward.getSubject());
-        Createaward1.setEmployee_image(createreward.getEmployee_image());
+
         Createreward update= repository.save(Createaward1);
         return update;
     }

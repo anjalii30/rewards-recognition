@@ -15,6 +15,9 @@ public interface CreaterewardRepository extends CrudRepository<Createreward, Lon
             nativeQuery=true)
     List<Createreward> findByRolled();
 
+    @Query(value = "SELECT * FROM createreward WHERE award_status = 0 AND ending_date > CURDATE()",nativeQuery = true)
+    List<Createreward> getALLCreatereward();
+
     @Query(value = "SELECT * FROM createreward WHERE award_status = 2",
             nativeQuery=true)
     List<Createreward> findByNominationClosed();
