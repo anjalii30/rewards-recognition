@@ -40,7 +40,7 @@ public class Awarded implements Serializable {
     private String subjectDescription;
 
     @Column(name = "Employee_image")
-    private Blob employee_image;
+    private String employee_image;
 
 
     public Awarded() {
@@ -78,8 +78,12 @@ public class Awarded implements Serializable {
         this.subjectDescription = subjectDescription;
     }
 
-    public Blob getEmployee_image() {
+    public String getEmployee_image() {
         return employee_image;
+    }
+
+    public void setEmployee_image(String employee_image) {
+        this.employee_image = employee_image;
     }
 
     @Override
@@ -93,7 +97,7 @@ public class Awarded implements Serializable {
                 ", employee_name='" + employee_name + '\'' +
                 ", project_name='" + project_name + '\'' +
                 ", subjectDescription='" + subjectDescription + '\'' +
-                ", employee_image=" + employee_image +
+                ", employee_image='" + employee_image + '\'' +
                 '}';
     }
 
@@ -129,8 +133,5 @@ public class Awarded implements Serializable {
         this.year = year;
     }
 
-    public void setEmployee_image(Blob employee_image) {
-        this.employee_image = employee_image;
-    }
 
 }
