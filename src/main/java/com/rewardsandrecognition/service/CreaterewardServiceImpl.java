@@ -18,7 +18,7 @@ public class CreaterewardServiceImpl implements CreaterewardService {
 
     @Override
     public List<Createreward> getALLCreatereward(){
-        return repository.getALLCreatereward();
+        return (List<Createreward>)repository.findAll();
     }
 
     @Override

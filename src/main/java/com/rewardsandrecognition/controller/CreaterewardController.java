@@ -86,7 +86,7 @@ public class CreaterewardController {
     }
 
     @GetMapping("/list")
-    public List<Createreward> getALLCreatereward(){
+    public List<Createreward> list(){
         return service.getALLCreatereward();
     }
 
