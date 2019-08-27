@@ -27,6 +27,9 @@ public class CreaterewardController {
     CreaterewardService service;
 
     @Autowired
+    AwardedService awardedService;
+
+    @Autowired
     private AuthenticationManager authenticationManager;
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
@@ -49,6 +52,9 @@ public class CreaterewardController {
     SampleNominateService snservice;
 
 
+
+
+
     @PostMapping("/save")
     public Createreward save(@RequestBody Createreward createreward){
         service.saveOrUpdate(createreward);
@@ -62,6 +68,20 @@ public class CreaterewardController {
 
     }
 
+    @GetMapping("/Rolledlist")
+    public List<Createreward> findByRolled(){
+        return service.findByRolled();
+    }
+
+    @GetMapping("/NominationClosed")
+    public List<Createreward> findByNominationClosed(){
+        return service.findByNominationClosed();
+    }
+
+    @GetMapping("/Discontinued")
+    public List<Createreward> findByDiscontinued(){
+        return service.findByDiscontinued();
+    }
 
     @GetMapping("/list")
     public List<Createreward> list(){
@@ -89,11 +109,7 @@ public class CreaterewardController {
         final UserDetails userDetails = userDetailsService
                 .loadUserByUsername(authenticationRequest.getUsername());
         final String token = jwtTokenUtil.generateToken(userDetails);
-       // String s[]=new String[2];
-        //s[0]=token;
-       // s[1] = DAOUserRepository.findRole((String) userDetails.get("username"))
-      return ResponseEntity.ok(new JwtResponse(token) );
-     //   return new ResponseEntity<>(s, HttpStatus.Ok);
+        return ResponseEntity.ok(new JwtResponse(token));
     }
     private void authenticate(String username, String password) throws Exception {
         try {
@@ -153,11 +169,42 @@ public class CreaterewardController {
 
     @PostMapping("/projects")
     public ProjectModel getProjects(@RequestBody ProjectModel projectModel){
-      //  String username=projectModelService.tokendecoder(token);
+        //  String username=projectModelService.tokendecoder(token);
         System.out.println(projectModel);
         nServices.getProjects(projectModel);
         return projectModel;
 
+    }
+
+    /*-------AWARDED--------*/
+
+    @PostMapping("/awardedSave")
+    public Awarded save(@RequestBody Awarded awarded){
+        awardedService.save(awarded);
+        return awarded;
+    }
+
+
+    @PutMapping("/awardedUpdate/{id}")
+    public Awarded Update(@PathVariable Long id,@RequestBody Awarded awarded){
+        return awardedService.Update(id, awarded);
+
+    }
+
+    @GetMapping("/awardedList")
+    public List<Awarded> awardedList(){
+        return awardedService.getALLAwarded();
+    }
+
+    @GetMapping("/awardedList/{id}")
+    public Awarded getByAwardedId(@PathVariable Long id){
+        return awardedService.getByAwardedId(id);
+    }
+
+    @DeleteMapping("/awardedDelete/{id}")
+    public String  deleteAwarded(@PathVariable Long id){
+        awardedService.deleteAwarded(id);
+        return "Deleted Successfully id="+id;
     }
 
 }
