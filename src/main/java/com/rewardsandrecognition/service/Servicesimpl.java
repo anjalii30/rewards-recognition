@@ -1,7 +1,5 @@
 package com.rewardsandrecognition.service;
 
-
-import com.rewardsandrecognition.model.DAOUser;
 import com.rewardsandrecognition.model.ProjectModel;
 import com.rewardsandrecognition.repository.DAOUserRepository;
 import com.rewardsandrecognition.repository.ProjectRepository;
@@ -21,17 +19,24 @@ public class Servicesimpl implements NServices {
     DAOUserRepository daoUserRepository;
     @Autowired
     ProjectRepository projectRepository;
-    @Autowired
-    ProjectModelService projectModelService;
+
 
     @Override
-    public List<ProjectModel> getProjectsList() {
-        return (List<ProjectModel>)projectModelService.getProjectsList();
+    public List getProjectsList()
+    {
+        return (List)projectRepository.getProjectsList();
     }
 
     @Override
     public List<String> getEmployeeByProject(String projectname) {
         System.out.println(projectname);
         return (List<String>)daoUserRepository.getEmployeeByProject(projectname);
+    }
+
+    @Override
+    public void getProjects(ProjectModel projectModel) {
+
+        projectRepository.save(projectModel);
+
     }
 }

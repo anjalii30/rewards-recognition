@@ -12,4 +12,7 @@ public interface DAOUserRepository extends CrudRepository<DAOUser, Integer> {
 
     @Query(value = "select u.username from users u where u.id in (Select emp_id from projects where projectname=?1)",nativeQuery = true)
     public List<String> getEmployeeByProject(String projectname);
+/*
+    @Query(value = "select distinct projectname from projects", nativeQuery = true)
+    public List<ProjectModel> getProjectsList();*/
 }

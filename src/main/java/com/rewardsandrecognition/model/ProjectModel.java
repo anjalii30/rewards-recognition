@@ -2,8 +2,6 @@ package com.rewardsandrecognition.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 
 
@@ -15,7 +13,7 @@ public class ProjectModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "projectid")
-    private Long projectid;
+    private int projectid;
     @Column(name = "projectname")
     private String projectname;
 
@@ -26,13 +24,13 @@ public class ProjectModel implements Serializable {
    public ProjectModel() {
     }
 
-    public ProjectModel(Long projectid, String projectname) {
+    public ProjectModel(int projectid, String projectname) {
         this.projectid = projectid;
         this.projectname = projectname;
-       // this.emp_id = emp_id;
+       this.emp_id = emp_id;
     }
 
-    public Long getProjectid() {
+    public int getProjectid() {
         return projectid;
     }
 
@@ -44,7 +42,7 @@ public class ProjectModel implements Serializable {
         this.emp_id = emp_id;
     }
 
-    public void setProjectid(Long projectid) {
+    public void setProjectid(int projectid) {
         this.projectid = projectid;
     }
 
