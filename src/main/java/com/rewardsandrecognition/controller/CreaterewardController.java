@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin
 @RestController
@@ -241,6 +242,22 @@ public class CreaterewardController {
     public String  deleteAwarded(@PathVariable Long id){
         awardedService.deleteAwarded(id);
         return "Deleted Successfully id="+id;
+    }
+
+
+    // track
+
+    @GetMapping("/list/{projectname}/{reward_name}")
+    public long findByproject(@PathVariable String projectname, @PathVariable String reward_name){
+        return snservice.findByproject(projectname, reward_name);
+    }
+
+    @PostMapping("/getRewardAndProject")
+    public Object findByrewardproject(@RequestBody Map<String,Object> request){
+        System.out.println(request);
+        String[] r=request.get("r").toString().replace("[", "").replace("]","").split(",");
+        String[] p=request.get("p").toString().replace("[", "").replace("]","").split(",");
+        return snservice.findByrewardproject(r,p);
     }
 
 }
