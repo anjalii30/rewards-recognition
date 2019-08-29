@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 @Service
@@ -37,4 +38,6 @@ public class JwtUserDetailsService implements UserDetailsService {
         newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
         return daoUserRepository.save(newUser);
     }
+
+
 }

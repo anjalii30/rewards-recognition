@@ -18,4 +18,6 @@ public interface AwardedService {
 
     public Awarded Update(Long id, Awarded awarded);
 
+    public Object getReport(Long year);
+
 }

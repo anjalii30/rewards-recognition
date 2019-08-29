@@ -1,3 +1,4 @@
+/*
 package com.rewardsandrecognition.model;
 
 
@@ -27,6 +28,11 @@ public class Report {
     @Column(name="year")
     @NotBlank
     private Long year;
+   */
+/* @ManyToOne (fetch = FetchType.LAZY)
+    @JoinColumn(name="award_id")
+    private Awarded award_id;*//*
+
 
     public Report() {
     }
@@ -79,3 +85,4 @@ public class Report {
         this.year = year;
     }
 }
+*/

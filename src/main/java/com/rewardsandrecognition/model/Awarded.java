@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Blob;
+import java.util.Set;
 
 
 @CrossOrigin
@@ -41,6 +42,10 @@ public class Awarded implements Serializable {
 
     @Column(name = "Employee_image")
     private String employee_image;
+
+    /*@OneToMany(fetch = FetchType.LAZY,mappedBy="award_id")
+    private Set<Report> award_id;*/
+
 
 
     public Awarded() {

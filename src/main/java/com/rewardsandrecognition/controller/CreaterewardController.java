@@ -3,7 +3,11 @@ package com.rewardsandrecognition.controller;
 
 import com.rewardsandrecognition.config.JwtTokenUtil;
 import com.rewardsandrecognition.model.*;
+import com.rewardsandrecognition.repository.AwardedRepository;
+import com.rewardsandrecognition.repository.DAOUserRepository;
+/*
 import com.rewardsandrecognition.repository.ReportRepository;
+*/
 import com.rewardsandrecognition.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -15,6 +19,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 @CrossOrigin
@@ -36,11 +41,17 @@ public class CreaterewardController {
     @Autowired
     private JwtUserDetailsService userDetailsService;
 
-    @Autowired
+  /*  @Autowired
     private
     ReportRepository reportRepository;
     @Autowired
-    ReportService reportService;
+    ReportService reportService;*/
+
+  @Autowired
+    AwardedRepository awardedRepository;
+
+    @Autowired
+    DAOUserRepository daoUserRepository;
 
 
 
@@ -109,8 +120,27 @@ public class CreaterewardController {
         final UserDetails userDetails = userDetailsService
                 .loadUserByUsername(authenticationRequest.getUsername());
         final String token = jwtTokenUtil.generateToken(userDetails);
-        return ResponseEntity.ok(new JwtResponse(token));
+       /* System.out.println(token);
+        String s[]=new String[2];
+        s[0]=token;
+        String  username = userDetails.getUsername();
+        String role=  daoUserRepository.findRoleByUserName(username);
+        s[1]=role;
+
+
+       *//* System.out.println(role);
+        System.out.println(s[0]+s[1]);
+       *//*
+       return ResponseEntity.ok(s);*/
+        String  username = userDetails.getUsername();
+        String role=  daoUserRepository.findRoleByUserName(username);
+        HashMap<String, String> s = new HashMap<String, String>();
+        s.put("token",token);
+        s.put("role",role);
+       Object send=  s ;
+        return ResponseEntity.ok(send);
     }
+
     private void authenticate(String username, String password) throws Exception {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
@@ -136,14 +166,14 @@ public class CreaterewardController {
 
     @GetMapping("/reports/years")
     public List getAllYears(){
-        List years= reportRepository.getAllYears();
+        List years= awardedRepository.getAllYears();
         return years;
     }
 
 
     @GetMapping("/reports/{year}")
     public Object getReport(@PathVariable Long year){
-        Object report = reportService.getReport(year);
+        Object report = awardedService.getReport(year);
         return report;
     }
 
