@@ -68,6 +68,12 @@ public class CreaterewardController {
 
     }
 
+    @PutMapping("/updateAwardStatus/{id}")
+    public Createreward updateAwardStatus(@PathVariable Long id,@RequestBody Createreward createreward){
+        return service.updateAwardStatus(id, createreward);
+
+    }
+
     @GetMapping("/Rolledlist")
     public List<Createreward> findByRolled(){
         return service.findByRolled();
