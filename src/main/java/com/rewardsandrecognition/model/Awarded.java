@@ -41,7 +41,7 @@ public class Awarded implements Serializable {
     private String subjectDescription;
 
     @Column(name = "Employee_image")
-    private String employee_image;
+    private Blob employee_image;
 
     /*@OneToMany(fetch = FetchType.LAZY,mappedBy="award_id")
     private Set<Report> award_id;*/
@@ -83,11 +83,11 @@ public class Awarded implements Serializable {
         this.subjectDescription = subjectDescription;
     }
 
-    public String getEmployee_image() {
+    public Blob getEmployee_image() {
         return employee_image;
     }
 
-    public void setEmployee_image(String employee_image) {
+    public void setEmployee_image(Blob employee_image) {
         this.employee_image = employee_image;
     }
 

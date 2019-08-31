@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Blob;
 import java.util.Date;
 @CrossOrigin
 @Entity
@@ -37,6 +36,10 @@ public class Createreward implements Serializable {
     private String nomination_url;
     @Column(name = "Ending_Date")
     private Date ending_date;
+    @Column(name = "discontinuedate")
+    private Date discontinuedate;
+    @Column(name = "discontinuereason")
+    private String discontiuereason;
 
     @Override
     public String toString() {
@@ -52,6 +55,8 @@ public class Createreward implements Serializable {
                 ", nomination_process='" + nomination_process + '\'' +
                 ", nomination_url='" + nomination_url + '\'' +
                 ", ending_date=" + ending_date +
+                ", discontinuedate=" + discontinuedate +
+                ", discontiuereason='" + discontiuereason + '\'' +
                 ", award_status=" + award_status +
                 '}';
     }
@@ -159,4 +164,19 @@ public class Createreward implements Serializable {
         this.nomination_url = nomination_url;
     }
 
+    public Date getDiscontinuedate() {
+        return discontinuedate;
+    }
+
+    public void setDiscontinuedate(Date discontinuedate) {
+        this.discontinuedate = discontinuedate;
+    }
+
+    public String getDiscontiuereason() {
+        return discontiuereason;
+    }
+
+    public void setDiscontiuereason(String discontiuereason) {
+        this.discontiuereason = discontiuereason;
+    }
 }

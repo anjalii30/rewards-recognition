@@ -1,7 +1,6 @@
 package com.rewardsandrecognition.service;
 
 import com.rewardsandrecognition.model.Awarded;
-import com.rewardsandrecognition.model.Createreward;
 
 import java.util.List;
 
@@ -9,6 +8,7 @@ public interface AwardedService {
 
     public List<Awarded> getALLAwarded();
 
+    public Object awardedList();
 
     public Awarded getByAwardedId(Long id);
 

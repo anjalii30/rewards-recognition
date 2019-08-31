@@ -33,4 +33,6 @@ public interface AwardedRepository extends CrudRepository<Awarded, Long> {
     public long spotFrequency(Long year);
 
 
+    @Query(value="SELECT employee_image,reward_name,subject_description from awarded",nativeQuery = true)
+    public List awardedList();
 }

@@ -71,4 +71,11 @@ public class AwardedServiceImpl implements AwardedService  {
         return report;
 
     }
+
+    @Override
+    public HashMap<Object,List> awardedList(){
+        HashMap<Object,List> awarded=new HashMap<>();
+        awarded.put("awarded", (List) awardedRepository.awardedList());
+        return awarded;
+    }
 }

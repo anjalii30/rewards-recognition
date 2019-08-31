@@ -228,11 +228,11 @@ public class CreaterewardController {
 
     }
 
-    @GetMapping("/awardedList")
+   /* @GetMapping("/awardedList")
     public List<Awarded> awardedList(){
         return awardedService.getALLAwarded();
     }
-
+*/
     @GetMapping("/awardedList/{id}")
     public Awarded getByAwardedId(@PathVariable Long id){
         return awardedService.getByAwardedId(id);
@@ -243,6 +243,13 @@ public class CreaterewardController {
         awardedService.deleteAwarded(id);
         return "Deleted Successfully id="+id;
     }
+
+    @GetMapping("/awardedList")
+    public Object awardedList(){
+        Object awarded= awardedService.awardedList();
+        return awarded;
+    }
+
 
 
     // track

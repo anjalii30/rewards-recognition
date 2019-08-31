@@ -16,8 +16,8 @@ public class Samplenominate implements Serializable {
     private String Employeename;
     @Column(name = "Description")
     private String Description;
-    @Column(name= "RewardName")
-    private String rewardname;
+    @Column(name= "reward_name")
+    private String reward_name;
 
     public String getProjectname() {
         return projectname;
@@ -43,21 +43,14 @@ public class Samplenominate implements Serializable {
         this.Description = description;
     }
 
-    public String getRewardname() {
-        return rewardname;
+
+    public String getReward_name() {
+        return reward_name;
     }
 
-    public void setRewardname(String rewardname) {
-        this.rewardname = rewardname;
+    public void setReward_name(String reward_name) {
+        this.reward_name = reward_name;
     }
 
-    @Override
-    public String toString() {
-        return "Samplenominate{" +
-                ", projectname='" + projectname + '\'' +
-                ", Employeename='" + Employeename + '\'' +
-                ", Description='" + Description + '\'' +
-                ", RewardName='" + rewardname +'\'' +
-                '}';
-    }
+
 }

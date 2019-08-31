@@ -67,6 +67,9 @@ public class CreaterewardServiceImpl implements CreaterewardService {
         Createaward1.setNomination_url(createreward.getNomination_url());
         Createaward1.setEnding_date(createreward.getEnding_date());
         Createaward1.setAward_status(createreward.getAward_status());
+        Createaward1.setDiscontinuedate(createreward.getDiscontinuedate());
+        Createaward1.setDiscontiuereason(createreward.getDiscontiuereason());
+
 
         Createreward update= repository.save(Createaward1);
         return update;
@@ -87,6 +90,8 @@ public class CreaterewardServiceImpl implements CreaterewardService {
         Createaward1.setNomination_url(Createaward1.getNomination_url());
         Createaward1.setEnding_date(Createaward1.getEnding_date());
         Createaward1.setAward_status(createreward.getAward_status());
+        Createaward1.setDiscontinuedate(createreward.getDiscontinuedate());
+        Createaward1.setDiscontiuereason(createreward.getDiscontiuereason());
 
         Createreward update= repository.save(Createaward1);
         return update;
