@@ -8,7 +8,7 @@ public interface AwardedService {
 
     public List<Awarded> getALLAwarded();
 
-    public Object something();
+    public Object ehomepage();
 
     public Awarded getByAwardedId(Long id);
 

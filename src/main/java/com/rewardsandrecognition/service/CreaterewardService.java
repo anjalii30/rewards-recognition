@@ -9,7 +9,9 @@ public interface CreaterewardService {
     public List<Createreward> getALLCreatereward();
 
 
+/*
     public Createreward getById(Long id);
+*/
 
     public void saveOrUpdate(Createreward createreward);
 

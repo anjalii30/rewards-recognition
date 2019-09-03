@@ -21,10 +21,10 @@ public class CreaterewardServiceImpl implements CreaterewardService {
         return (List<Createreward>)repository.findAll();
     }
 
-    @Override
+   /* @Override
     public Createreward getById(Long id){
         return repository.findById(id).get();
-    }
+    }*/
 
     @Override
     public void saveOrUpdate(Createreward createreward){

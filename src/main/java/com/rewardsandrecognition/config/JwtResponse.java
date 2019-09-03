@@ -1,4 +1,4 @@
-package com.rewardsandrecognition.model;
+package com.rewardsandrecognition.config;
 
 import java.io.Serializable;
 

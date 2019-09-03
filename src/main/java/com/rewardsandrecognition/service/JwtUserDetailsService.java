@@ -1,7 +1,7 @@
 package com.rewardsandrecognition.service;
 
 import com.rewardsandrecognition.model.DAOUser;
-import com.rewardsandrecognition.model.UserDTO;
+//import com.rewardsandrecognition.model.UserDTO;
 import com.rewardsandrecognition.repository.DAOUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -32,7 +32,7 @@ public class JwtUserDetailsService implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
                 new ArrayList<>());
     }
-    public DAOUser save(UserDTO user) {
+    public DAOUser save(DAOUser user) {
         DAOUser newUser = new DAOUser();
         newUser.setUsername(user.getUsername());
         newUser.setPassword(bcryptEncoder.encode(user.getPassword()));

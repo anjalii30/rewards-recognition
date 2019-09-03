@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
-@CrossOrigin
+
 @Repository
 public interface CreaterewardRepository extends CrudRepository<Createreward, Long> {
 

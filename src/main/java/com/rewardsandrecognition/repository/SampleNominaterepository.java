@@ -16,6 +16,6 @@ public interface SampleNominaterepository extends CrudRepository<Samplenominate,
     long findByproject(String reward_name, String projectname);
 
 
-    @Query(value="select  *   from nominations ", nativeQuery = true)
-    List<Samplenominate> tracklist();
+    /*@Query(value="select  *   from nominations ", nativeQuery = true)
+    List<Samplenominate> tracklist();*/
 }

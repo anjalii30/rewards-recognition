@@ -1,44 +1,62 @@
 package com.rewardsandrecognition.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-@CrossOrigin
+
 @Entity
 @Table(name = "createreward")
 @EntityListeners(AuditingEntityListener.class)
+@ApiModel(description = "All details about the Reward created ")
+
 public class Createreward implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private long id;
+    @ApiModelProperty(notes = "The database generated awarded ID")
+    private long id;
 
     @Column(name = "Reward_Name")
+    @ApiModelProperty(notes = "Reward name")
+
     private String reward_name;
     @Column(name = "Reward_Scope")
+    @ApiModelProperty(notes = "Reward Scope like project/departmental/organizational")
     private String reward_scope;
     @Column(name = "Frequency")
+    @ApiModelProperty(notes = "Frequency like weekly/monthly/spot etc")
     private String frequency;
     @Column(name = "Description")
+    @ApiModelProperty(notes = "Description of reward")
     private String description;
     @Column(name = "Objective")
+    @ApiModelProperty(notes = "Objective of reward ")
     private String objective;
     @Column(name = "Starting_Date")
+    @ApiModelProperty(notes = "Date on which reward is created")
     private Date starting_date; /* year-month-date*/
     @Column(name = "Reward_Type")
+    @ApiModelProperty(notes = "Type of reward")
     private String reward_type;
     @Column(name = "Nomination_Process")
+    @ApiModelProperty(notes = "Process of nomination")
     private String nomination_process;
     @Column(name = "Nomination_Url")
+    @ApiModelProperty(notes = "Nomination from url")
     private String nomination_url;
     @Column(name = "Ending_Date")
+    @ApiModelProperty(notes = "Date on which reward is deleted")
     private Date ending_date;
     @Column(name = "discontinuedate")
+    @ApiModelProperty(notes = "Date on which reward is discontinued")
     private Date discontinuedate;
     @Column(name = "discontinuereason")
+    @ApiModelProperty(notes = "Discontinue reason")
     private String discontiuereason;
 
     @Override

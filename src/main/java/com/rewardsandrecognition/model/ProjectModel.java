@@ -1,5 +1,8 @@
 package com.rewardsandrecognition.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -7,18 +10,21 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "projects")
-
+@ApiModel(description = "All details about Projects ")
 public class ProjectModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @ApiModelProperty(notes = "The database generated awarded ID")
     @Column(name = "projectid")
     private int projectid;
     @Column(name = "projectname")
+    @ApiModelProperty(notes = "Project name")
     private String projectname;
 
    @ManyToOne (fetch = FetchType.LAZY)
    @JoinColumn(name="emp_id")
+   @ApiModelProperty(notes = "user id mapped from users table")
     private DAOUser emp_id;
 
    public ProjectModel() {

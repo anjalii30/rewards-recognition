@@ -1,24 +1,32 @@
 package com.rewardsandrecognition.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 @Table(name = "users")
+@ApiModel(description = "All details about User ")
 public class DAOUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty(notes = "The database generated awarded ID")
     private long id;
     @Column
+    @ApiModelProperty(notes = "Username")
     private String username;
     @Column
-    @JsonIgnore
+    //@JsonIgnore
+    @ApiModelProperty(notes = "Password")
     private String password;
     @Column(name="role")
+    @ApiModelProperty(notes = "User role by default 'employee'")
     private String role="employee";
     @OneToMany(fetch = FetchType.LAZY,mappedBy="emp_id")
+    @ApiModelProperty(notes = "user_id mapped to project table")
     private Set<ProjectModel> emp_id;
 
     public DAOUser() {
