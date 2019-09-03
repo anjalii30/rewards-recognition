@@ -18,6 +18,7 @@ public class Samplenominate implements Serializable {
     private String Description;
     @Column(name= "reward_name")
     private String reward_name;
+    private boolean isDisable=false;
 
     public String getProjectname() {
         return projectname;
@@ -52,5 +53,11 @@ public class Samplenominate implements Serializable {
         this.reward_name = reward_name;
     }
 
+    public boolean isDisable() {
+        return isDisable;
+    }
 
+    public void setDisable(boolean disable) {
+        isDisable = disable;
+    }
 }

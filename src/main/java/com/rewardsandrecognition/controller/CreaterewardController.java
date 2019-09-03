@@ -8,9 +8,12 @@ import com.rewardsandrecognition.repository.DAOUserRepository;
 /*
 import com.rewardsandrecognition.repository.ReportRepository;
 */
+import com.rewardsandrecognition.repository.ProjectRepository;
+import com.rewardsandrecognition.repository.SampleNominaterepository;
 import com.rewardsandrecognition.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -19,6 +22,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.ws.Response;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -63,14 +68,27 @@ public class CreaterewardController {
     @Autowired
     SampleNominateService snservice;
 
+    @Autowired
+    SampleNominaterepository sampleNominaterepository;
+
+
+    @Autowired
+    ProjectRepository projectRepository;
+
 
 
 
 
     @PostMapping("/save")
-    public Createreward save(@RequestBody Createreward createreward){
-        service.saveOrUpdate(createreward);
-        return createreward;
+    public ResponseEntity<?> save(@RequestBody Createreward createreward){
+        Date edate = createreward.getEnding_date();
+        Date sdate = createreward.getStarting_date();
+        if(edate.compareTo(sdate)>0) {
+            service.saveOrUpdate(createreward);
+            return  ResponseEntity.ok(createreward);
+        }
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+
     }
 
 
@@ -127,18 +145,7 @@ public class CreaterewardController {
         final UserDetails userDetails = userDetailsService
                 .loadUserByUsername(authenticationRequest.getUsername());
         final String token = jwtTokenUtil.generateToken(userDetails);
-       /* System.out.println(token);
-        String s[]=new String[2];
-        s[0]=token;
-        String  username = userDetails.getUsername();
-        String role=  daoUserRepository.findRoleByUserName(username);
-        s[1]=role;
 
-
-       *//* System.out.println(role);
-        System.out.println(s[0]+s[1]);
-       *//*
-       return ResponseEntity.ok(s);*/
         String  username = userDetails.getUsername();
         String role=  daoUserRepository.findRoleByUserName(username);
         HashMap<String, String> s = new HashMap<String, String>();
@@ -201,6 +208,7 @@ public class CreaterewardController {
     @PostMapping("/trail/save")
     public Samplenominate save(@RequestBody Samplenominate samplenominate) {
         snservice.save(samplenominate);
+        samplenominate.setDisable(true);
         return samplenominate;
     }
 
@@ -228,11 +236,11 @@ public class CreaterewardController {
 
     }
 
-   /* @GetMapping("/awardedList")
+    @GetMapping("/awardedList")
     public List<Awarded> awardedList(){
         return awardedService.getALLAwarded();
     }
-*/
+
     @GetMapping("/awardedList/{id}")
     public Awarded getByAwardedId(@PathVariable Long id){
         return awardedService.getByAwardedId(id);
@@ -244,9 +252,9 @@ public class CreaterewardController {
         return "Deleted Successfully id="+id;
     }
 
-    @GetMapping("/awardedList")
-    public Object awardedList(){
-        Object awarded= awardedService.awardedList();
+    @GetMapping("/something")
+    public Object something(){
+        Object awarded= awardedService.something();
         return awarded;
     }
 
@@ -266,5 +274,11 @@ public class CreaterewardController {
         String[] p=request.get("p").toString().replace("[", "").replace("]","").split(",");
         return snservice.findByrewardproject(r,p);
     }
+
+    @GetMapping("/track")
+    public List<Samplenominate> tracklist(){
+        return  sampleNominaterepository.tracklist();
+    }
+
 
 }

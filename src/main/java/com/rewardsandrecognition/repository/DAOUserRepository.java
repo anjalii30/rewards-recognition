@@ -18,9 +18,9 @@ public interface DAOUserRepository extends CrudRepository<DAOUser, Integer> {
 
 
 
-    @Query(value = "select distinct projectname from projects", nativeQuery = true)
+    /*@Query(value = "select distinct projectname from projects", nativeQuery = true)
     public List<ProjectModel> getProjectsList();
-
+*/
     @Query(value = "select role from users where username=?1", nativeQuery = true)
     String findRoleByUserName(String username);
 }

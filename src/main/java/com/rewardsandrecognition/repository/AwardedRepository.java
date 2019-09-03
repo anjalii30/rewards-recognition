@@ -34,5 +34,5 @@ public interface AwardedRepository extends CrudRepository<Awarded, Long> {
 
 
     @Query(value="SELECT employee_image,reward_name,subject_description from awarded",nativeQuery = true)
-    public List awardedList();
+    public List something();
 }
