@@ -62,7 +62,7 @@ public class CreaterewardController {
     @GetMapping("/Rolledlist")
     public List<Createreward> findByRolled() {
 
-     
+
             return createrewardRepository.findByRolled();
 
     }
