@@ -1,19 +1,22 @@
-package com.rar.service;
+package com.rar.service.impl;
 
 
 import com.rar.model.Createreward;
 import com.rar.repository.CreaterewardRepository;
+import com.rar.service.CreaterewardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
 public class CreaterewardServiceImpl implements CreaterewardService {
 
     @Autowired
-    CreaterewardRepository repository;
+    private CreaterewardRepository repository;
 
 
 
@@ -60,6 +63,60 @@ public class CreaterewardServiceImpl implements CreaterewardService {
 
         Createreward update= repository.save(Createaward1);
         return update;
+    }
+
+    @Override
+    public Optional<Createreward> findById(Long id) {
+
+        return repository.findById(id);
+    }
+
+    @Override
+    public String deleteById(Long id) {
+        repository.deleteById(id);
+        return null;
+    }
+
+    @Override
+    public List<Createreward> findAll() {
+
+        return (List<Createreward>) repository.findAll();
+    }
+
+    @Override
+    public List<Createreward> findByDiscontinued() {
+
+        return repository.findByDiscontinued();
+    }
+
+    @Override
+    public List<Createreward> findByNominationClosed() {
+
+        return repository.findByNominationClosed();
+    }
+
+    @Override
+    public List<Createreward> findByRolled() {
+
+        return repository.findByRolled();
+    }
+
+    @Override
+    public Createreward save(Createreward createreward) {
+
+        Createreward reward=new Createreward();
+        reward.setFrequency(createreward.getFrequency());
+        reward.setReward_name(createreward.getReward_name());
+        reward.setReward_type(createreward.getReward_type());
+        reward.setReward_scope(createreward.getReward_scope());
+        reward.setDescription(createreward.getDescription());
+        reward.setObjective(createreward.getObjective());
+        reward.setStarting_date(createreward.getStarting_date());
+        reward.setEnding_date(createreward.getEnding_date());
+        reward.setNomination_process(createreward.getNomination_process());
+        reward.setNomination_url(createreward.getNomination_url());
+
+        return repository.save(reward);
     }
 
 }

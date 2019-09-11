@@ -9,7 +9,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "nominations")
 @ApiModel(description = "All details about Nominations ")
-public class Samplenominate implements Serializable {
+public class Nominate implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -35,9 +35,7 @@ public class Samplenominate implements Serializable {
     @Column(name="loginuser")
     private String loginuser;
 
-    /*@ApiModelProperty(notes = "Disable nominate so that only one employee can be nominated for a reward")
-    private boolean isDisable=false;
-*/
+
     public String getProjectname() {
         return projectname;
     }
@@ -79,11 +77,4 @@ public class Samplenominate implements Serializable {
         this.loginuser = loginuser;
     }
 
-    /*public boolean isDisable(boolean b) {
-        return isDisable;
-    }
-
-    public void setDisable(boolean disable) {
-        isDisable = disable;
-    }
-*/}
+}

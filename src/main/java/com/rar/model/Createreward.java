@@ -1,5 +1,8 @@
 package com.rar.model;
 
+import com.rar.enums.FrequencyEnum;
+import com.rar.enums.RewardEnum;
+import com.rar.enums.ScopeEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -22,67 +25,58 @@ public class Createreward implements Serializable {
 
     @Column(name = "Reward_Name")
     @ApiModelProperty(notes = "Reward name")
-
     private String reward_name;
+
     @Column(name = "Reward_Scope")
     @ApiModelProperty(notes = "Reward Scope like project/departmental/organizational")
-    private String reward_scope;
+    private ScopeEnum reward_scope;
+
     @Column(name = "Frequency")
     @ApiModelProperty(notes = "Frequency like weekly/monthly/spot etc")
-    private String frequency;
+    private FrequencyEnum frequency;
+
     @Column(name = "Description")
     @ApiModelProperty(notes = "Description of reward")
     private String description;
+
     @Column(name = "Objective")
     @ApiModelProperty(notes = "Objective of reward ")
     private String objective;
+
     @Column(name = "Starting_Date")
     @ApiModelProperty(notes = "Date on which reward is created")
     private Date starting_date; /* year-month-date*/
+
     @Column(name = "Reward_Type")
     @ApiModelProperty(notes = "Type of reward")
-    private String reward_type;
+    private RewardEnum reward_type;
+
     @Column(name = "Nomination_Process")
     @ApiModelProperty(notes = "Process of nomination")
     private String nomination_process;
+
     @Column(name = "Nomination_Url")
     @ApiModelProperty(notes = "Nomination from url")
     private String nomination_url;
+
     @Column(name = "Ending_Date")
     @ApiModelProperty(notes = "Date on which reward is deleted")
     private Date ending_date;
+
     @Column(name = "discontinuedate")
     @ApiModelProperty(notes = "Date on which reward is discontinued")
     private Date discontinuedate;
+
     @Column(name = "discontinuereason")
     @ApiModelProperty(notes = "Discontinue reason")
     private String discontiuereason;
+
     @Column(name = "Award_Status")
     @ApiModelProperty(notes = "Award Status")
     private int award_status=0;
 
     public Createreward() {
     }
-
-
-
-    public Date getEnding_date() {
-        return ending_date;
-    }
-
-    public void setEnding_date(Date ending_date) {
-        this.ending_date = ending_date;
-    }
-
-
-    public int getAward_status() {
-        return award_status;
-    }
-
-    public void setAward_status(int award_status) {
-        this.award_status = award_status;
-    }
-
 
     public long getId() {
         return id;
@@ -100,19 +94,19 @@ public class Createreward implements Serializable {
         this.reward_name = reward_name;
     }
 
-    public String getReward_scope() {
+    public ScopeEnum getReward_scope() {
         return reward_scope;
     }
 
-    public void setReward_scope(String reward_scope) {
+    public void setReward_scope(ScopeEnum reward_scope) {
         this.reward_scope = reward_scope;
     }
 
-    public String getFrequency() {
+    public FrequencyEnum getFrequency() {
         return frequency;
     }
 
-    public void setFrequency(String frequency) {
+    public void setFrequency(FrequencyEnum frequency) {
         this.frequency = frequency;
     }
 
@@ -140,11 +134,11 @@ public class Createreward implements Serializable {
         this.starting_date = starting_date;
     }
 
-    public String getReward_type() {
+    public RewardEnum getReward_type() {
         return reward_type;
     }
 
-    public void setReward_type(String reward_type) {
+    public void setReward_type(RewardEnum reward_type) {
         this.reward_type = reward_type;
     }
 
@@ -164,6 +158,14 @@ public class Createreward implements Serializable {
         this.nomination_url = nomination_url;
     }
 
+    public Date getEnding_date() {
+        return ending_date;
+    }
+
+    public void setEnding_date(Date ending_date) {
+        this.ending_date = ending_date;
+    }
+
     public Date getDiscontinuedate() {
         return discontinuedate;
     }
@@ -178,6 +180,14 @@ public class Createreward implements Serializable {
 
     public void setDiscontiuereason(String discontiuereason) {
         this.discontiuereason = discontiuereason;
+    }
+
+    public int getAward_status() {
+        return award_status;
+    }
+
+    public void setAward_status(int award_status) {
+        this.award_status = award_status;
     }
 
     @Override

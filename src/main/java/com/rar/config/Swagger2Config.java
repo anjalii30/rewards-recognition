@@ -31,4 +31,10 @@ public class    Swagger2Config {
                 .version("1.0.0")
                 .build();
     }
+
+ /*   private static ApiKey securitySchemes() {
+
+        return (new ApiKey("Bearer", "Authorization", "header"));
+    }*/
+
 }

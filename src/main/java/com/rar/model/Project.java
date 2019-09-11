@@ -6,11 +6,10 @@ import io.swagger.annotations.ApiModelProperty;
 import javax.persistence.*;
 import java.io.Serializable;
 
-
 @Entity
 @Table(name = "projects")
 @ApiModel(description = "All details about Projects ")
-public class ProjectModel implements Serializable {
+public class Project implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,29 +21,29 @@ public class ProjectModel implements Serializable {
     @ApiModelProperty(notes = "Project name")
     private String projectname;
 
-   @ManyToOne (fetch = FetchType.LAZY)
-   @JoinColumn(name="emp_id")
-   @ApiModelProperty(notes = "user id mapped from users table")
-    private DAOUser emp_id;
+    @ManyToOne (fetch = FetchType.LAZY)
+    @JoinColumn(name="emp_id")
+    @ApiModelProperty(notes = "user id mapped from users table")
+    private User emp_id;
 
-   public ProjectModel() {
+    public Project() {
     }
 
-    public ProjectModel(int projectid, String projectname,DAOUser emp_id) {
+    public Project(int projectid, String projectname,User emp_id) {
         this.projectid = projectid;
         this.projectname = projectname;
-       this.emp_id = emp_id;
+        this.emp_id = emp_id;
     }
 
     public int getProjectid() {
         return projectid;
     }
 
-    public DAOUser getEmp_id() {
+    public User getEmp_id() {
         return emp_id;
     }
 
-    public void setEmp_id(DAOUser emp_id) {
+    public void setEmp_id(User emp_id) {
         this.emp_id = emp_id;
     }
 

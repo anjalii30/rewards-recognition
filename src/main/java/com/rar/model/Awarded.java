@@ -49,7 +49,7 @@ public class Awarded implements Serializable {
     @ApiModelProperty(notes = "Description of why reward is given")
     private String subjectDescription;
 
-    @Column(name = "Employee_image")
+    @Column(name = "Employee_image", length = 2100000000)
     @ApiModelProperty(notes = "Employee image")
     private String employee_image;
 
@@ -98,20 +98,6 @@ public class Awarded implements Serializable {
         this.employee_image = employee_image;
     }
 
-    @Override
-    public String toString() {
-        return "Awarded{" +
-                "awarded_id=" + awarded_id +
-                ", reward_name='" + reward_name + '\'' +
-                ", frequency='" + frequency + '\'' +
-                ", emp_id='" + emp_id + '\'' +
-                ", year='" + year + '\'' +
-                ", employee_name='" + employee_name + '\'' +
-                ", project_name='" + project_name + '\'' +
-                ", subjectDescription='" + subjectDescription + '\'' +
-                ", employee_image='" + employee_image + '\'' +
-                '}';
-    }
 
     public String getReward_name() {
         return reward_name;
@@ -145,5 +131,19 @@ public class Awarded implements Serializable {
         this.year = year;
     }
 
+    @Override
+    public String toString() {
+        return "Awarded{" +
+                "awarded_id=" + awarded_id +
+                ", reward_name='" + reward_name + '\'' +
+                ", frequency='" + frequency + '\'' +
+                ", emp_id='" + emp_id + '\'' +
+                ", year='" + year + '\'' +
+                ", employee_name='" + employee_name + '\'' +
+                ", project_name='" + project_name + '\'' +
+                ", subjectDescription='" + subjectDescription + '\'' +
+                ", employee_image='" + employee_image + '\'' +
+                '}';
+    }
 
 }

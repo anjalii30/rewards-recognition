@@ -11,7 +11,6 @@ public interface AwardedRepository extends CrudRepository<Awarded, Long> {
     @Query(value = "SELECT  DISTINCT year from awarded ", nativeQuery = true)
     public List getAllYears();
 
-
     @Query(value = "SELECT  count(DISTINCT employee_id) from awarded where year = ?1  ", nativeQuery = true)
     public long findByPeople(Long year);
 

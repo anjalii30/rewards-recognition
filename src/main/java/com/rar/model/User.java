@@ -1,6 +1,9 @@
 package com.rar.model;
+
+import com.rar.enums.RoleEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -8,7 +11,7 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 @ApiModel(description = "All details about User ")
-public class DAOUser {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,22 +23,24 @@ public class DAOUser {
     private String username;
 
     @Column
-    //@JsonIgnore
     @ApiModelProperty(notes = "Password")
     private String password;
 
+    @Enumerated(EnumType.STRING)
+    @NaturalId
     @Column(name="role")
     @ApiModelProperty(notes = "User role by default 'employee'")
-    private String role="employee";
+    // private String role="employee";
+    private RoleEnum role=RoleEnum.EMPLOYEE;
 
     @OneToMany(fetch = FetchType.LAZY,mappedBy="emp_id")
     @ApiModelProperty(notes = "user_id mapped to project table")
-    private Set<ProjectModel> emp_id;
+    private Set<Project> emp_id;
 
-    public DAOUser() {
+    public User() {
     }
 
-    public DAOUser(long id, String username, String password, String role) {
+    public User(long id, String username, String password, RoleEnum role) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -52,11 +57,12 @@ public class DAOUser {
     }
 
 
-    public String getRole() {
+    public RoleEnum getRole() {
+
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(RoleEnum role) {
         this.role = role;
     }
 
@@ -69,10 +75,15 @@ public class DAOUser {
         this.username = username;
     }
 
-    public String getPassword() {
+    public String getPassword()
+    {
         return password;
     }
 
     public void setPassword(String password) {
+
         this.password = password;
-    }}
+    }
+
+}
+

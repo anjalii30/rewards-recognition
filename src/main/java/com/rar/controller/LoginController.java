@@ -2,11 +2,12 @@ package com.rar.controller;
 
 import com.rar.config.JwtRequest;
 import com.rar.config.JwtTokenUtil;
-import com.rar.model.DAOUser;
-import com.rar.repository.DAOUserRepository;
-import com.rar.service.JwtUserDetailsService;
+import com.rar.model.User;
+import com.rar.repository.UserRepository;
+import com.rar.service.UserServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.ResponseEntity;
@@ -31,15 +32,20 @@ public class LoginController {
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
     @Autowired
-    private JwtUserDetailsService userDetailsService;
+    private UserServiceImpl userDetailsService;
 
     @Autowired
-    DAOUserRepository daoUserRepository;
+    private UserRepository daoUserRepository;
 
-
+    /**
+     *
+     * @param authenticationRequest (username,password)
+     * @return username, role, JSON web token
+     * @throws Exception
+     */
     @ApiOperation(value = "Authenticate username and password and generate JWT token along with role of the user")
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
+    public ResponseEntity<?> createAuthenticationToken(@ApiParam(value = "Authorize credentials and create Jwt token",required = true) @RequestBody JwtRequest authenticationRequest) throws Exception {
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
         final UserDetails userDetails = userDetailsService
                 .loadUserByUsername(authenticationRequest.getUsername());
@@ -64,9 +70,15 @@ public class LoginController {
         }
     }
 
+    /**
+     *
+     * @param user (user object)
+     * @return username,password,role
+     * @throws Exception
+     */
     @ApiOperation(value = "registering user by username and password and by default role is 'employee'")
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public ResponseEntity<?> saveUser(@RequestBody DAOUser user) throws Exception {
+    @PostMapping(value = "/register")
+    public ResponseEntity<?> saveUser(@ApiParam(value="User object store in database table",required = true) @RequestBody User user) throws Exception {
         return ResponseEntity.ok(userDetailsService.save(user));
     }
 }

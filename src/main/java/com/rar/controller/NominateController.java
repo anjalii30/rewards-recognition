@@ -1,13 +1,14 @@
 package com.rar.controller;
 
-import com.rar.model.ProjectModel;
-import com.rar.model.Samplenominate;
-import com.rar.repository.DAOUserRepository;
+import com.rar.model.Nominate;
+import com.rar.model.Project;
+import com.rar.repository.NominateRepository;
 import com.rar.repository.ProjectRepository;
-import com.rar.repository.SampleNominaterepository;
-import com.rar.service.SampleNominateService;
+import com.rar.repository.UserRepository;
+import com.rar.service.NominateService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.*;
@@ -22,50 +23,72 @@ import java.util.List;
 public class NominateController {
 
 
-    @Autowired
-    SampleNominateService snservice;
+   @Autowired
+   private NominateService nominateService;
 
     @Autowired
-    DAOUserRepository daoUserRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    ProjectRepository projectRepository;
+    private ProjectRepository projectRepository;
 
     @Autowired
-    SampleNominaterepository sampleNominaterepository;
+    private NominateRepository sampleNominaterepository;
 
     @Autowired
-    CreaterewardController createrewardController;
+    private CreaterewardController createrewardController;
 
-    @ApiOperation(value = "get employees list for the particular project")
+    /**
+     *
+     * @param projectname (Project name)
+     * @return list of employees assigned to given project
+     */
+    @ApiOperation(value = "get employees list for the particular project",response = List.class)
     @GetMapping(value = "/trail/load/{projectname}")
-    public List<String> load(@PathVariable String projectname) {
+    public List<String> load(@PathVariable String projectname,@RequestHeader (value="Authorization") String token) {
         System.out.println(projectname);
-        List<String> users = daoUserRepository.getEmployeeByProject(projectname);
+        List<String> users = nominateService.getEmployeeByProject(projectname);
         return users;
     }
 
-    @ApiOperation(value = "returns the list of projects")
+    /**
+     *
+     * @return projects list
+     */
+    @ApiOperation(value = "returns the list of projects",response = List.class)
     @GetMapping("/trail/projectlist")
-    public List getProjectsList() {
-        return (List) projectRepository.getProjectsList();
+    public List getProjectsList(@RequestHeader (value="Authorization") String token) {
+
+        return (List) nominateService.getProjectsList();
     }
 
+    /**
+     *
+     * @param samplenominate (Nominate object)
+     * @return saved nomination data
+     */
     @ApiOperation(value = "get the nomination data and disable it once nominated")
     @PostMapping("/trail/save")
-    public Samplenominate save(@RequestBody Samplenominate samplenominate) {
-        sampleNominaterepository.save(samplenominate);
+    public Nominate save(@ApiParam(value="Nominations store in database table",required = true)
+                             @RequestBody Nominate samplenominate,@RequestHeader (value="Authorization") String token) {
+        nominateService.save(samplenominate);
        // createrewardController.findByRolled();
        // samplenominate.setDisable(true);
         return samplenominate;
     }
 
+    /**
+     *
+     * @param projectModel (Project object)
+     * @return created project and assigned employees
+     */
     @ApiOperation(value = "create project and assign employees ")
     @PostMapping("/projects")
-    public ProjectModel getProjects(@RequestBody ProjectModel projectModel){
+    public Project getProjects(@ApiParam(value="Project data store in database table",required=true)
+                                   @RequestBody Project projectModel,@RequestHeader (value="Authorization") String token){
         //  String username=projectModelService.tokendecoder(token);
         System.out.println(projectModel);
-        projectRepository.save(projectModel);
+        nominateService.saveProject(projectModel);
         return projectModel;
 
     }

@@ -1,16 +1,16 @@
 package com.rar.repository;
 
-import com.rar.model.DAOUser;
+import com.rar.model.User;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface DAOUserRepository extends CrudRepository<DAOUser, Integer> {
+public interface UserRepository extends CrudRepository<User, Integer> {
 
 
 
-    DAOUser findByUsername(String username);
+    User findByUsername(String username);
 
     @Query(value = "select u.username from users u where u.id in (Select emp_id from projects where projectname=?1)",nativeQuery = true)
     public List<String> getEmployeeByProject(String projectname);

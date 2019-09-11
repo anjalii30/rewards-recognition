@@ -1,6 +1,6 @@
 package com.rar.repository;
 
-import com.rar.model.ProjectModel;
+import com.rar.model.Project;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -11,7 +11,7 @@ import java.util.List;
 
 @Transactional
 @Repository
-public interface ProjectRepository extends CrudRepository<ProjectModel, Integer> {
+public interface ProjectRepository extends CrudRepository<Project, Integer> {
 
 
 
